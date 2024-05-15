@@ -16,11 +16,12 @@ class MyApp extends StatelessWidget {
       create: (context) => CounterBloc(),
       child: MaterialApp(
           title: 'Flutter Demo',
+          debugShowCheckedModeBanner: false,
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          home: const MyHomePage(title: 'Flutter Demo Home Page'),
+          home: const MyHomePage(title: 'Counterapp'),
         ),
     );
   }
@@ -47,14 +48,14 @@ class MyHomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
-              'You have pushed the button this many times:',
+              'Counter',style: TextStyle(fontSize: 50,fontWeight: FontWeight.bold),
             ),
             BlocBuilder<CounterBloc, CounterState>(
               builder: (context, state) {
                 log('blocBuilder called');
                 return Text(
                           '${state.count}',
-                          style: Theme.of(context).textTheme.headlineMedium,
+                          style: Theme.of(context).textTheme.headlineLarge,
                         );
               },
             ),
@@ -67,7 +68,6 @@ class MyHomePage extends StatelessWidget {
           FloatingActionButton(
             onPressed: (){
               context.read<CounterBloc>().add(const Increment());
-              // BlocProvider.of<CounterBloc>(context).add(Increment());
             },
             tooltip: 'Increment',
             child: const Icon(Icons.add),
@@ -75,7 +75,6 @@ class MyHomePage extends StatelessWidget {
           FloatingActionButton(
             onPressed: (){
               context.read<CounterBloc>().add(const Decrement());
-              // BlocProvider.of<CounterBloc>(context).add(Increment());
             },
             tooltip: 'Decrement',
             child: const Icon(Icons.remove),
